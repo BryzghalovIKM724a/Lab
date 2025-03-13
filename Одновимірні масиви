@@ -52,7 +52,7 @@ int main()
 
     double average = sum / count;
 
-    cout << "Середнє арифметичне елементів між min і max (включно): " << average << endl;
+    cout << "Середнє арифметичне елементів між min і max : " << average << endl;
 
     return 0;
 }
