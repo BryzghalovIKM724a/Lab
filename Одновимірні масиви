@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <Windows.h>
 
 using namespace std;
@@ -8,7 +7,6 @@ int main()
 {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-
 
     double array[20];
 
@@ -38,8 +36,8 @@ int main()
     cout << "Максимальне значення: " << max << ", індекс: " << max_index << endl;
     cout << "Мінімальне значення: " << min << ", індекс: " << min_index << endl;
 
-    int startIndex = min(min_index, max_index);
-    int endIndex = max(min_index, max_index); 
+    int startIndex = (min_index < max_index) ? min_index : max_index;
+    int endIndex = (min_index > max_index) ? min_index : max_index;
 
     double sum = 0;
     int count = 0;
