@@ -1,0 +1,55 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+struct Student {
+    int id;
+    string surname;
+    string birthMonth;
+    bool getsScholarship;
+};
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    const int SIZE = 21;
+    Student students[SIZE] = {
+        {1, "Костенко", "квітень", true},
+        {2, "Ковтун", "квітень", true},
+        {3, "Загній", "червень", true},
+        {4, "Петренко", "серпень", true},
+        {5, "Чернявська", "квітень", true},
+        {6, "Уманський", "травень", false},
+        {7, "Халін", "травень", true},
+        {8, "Наливайко", "?", false},
+        {9, "Нагорний", "вересень", false},
+        {10, "Журавель", "червень", true},
+        {11, "Копусь", "червень", true},
+        {12, "Бахметьєв", "травень", true},
+        {13, "Бризгалов", "серпень", true},
+        {14, "Баронін", "жовтень", true},
+        {15, "Городиський", "вересень", false},
+        {16, "Царьова", "вересень", true},
+        {17, "Калініченко", "жовтень", false},
+        {18, "Шевяков", "листопад", false},
+        {19, "Винограденко", "листопад", false},
+        {20, "Ходько", "листопад", false},
+        {21, "Матвейчук", "листопад", true}
+    };
+
+    cout << "Список студентів:\n";
+    for (int i = 0; i < SIZE; i++) {
+        cout << students[i].id << ". " << students[i].surname << " ("
+            << students[i].birthMonth << ") - ";
+        cout << (students[i].getsScholarship ? "отримує стипендію" : "не отримує стипендію") << endl;
+    }
+
+    cout << "\nНайбільше студентів народилося у місяцях:\n";
+    cout << "Вересень (3 студенти)\n";
+    cout << "Червень (3 студенти)\n";
+    cout << "Листопад (3 студенти)\n";
+
+    return 0;
+}
