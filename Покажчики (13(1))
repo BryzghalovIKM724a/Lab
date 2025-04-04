@@ -1,0 +1,23 @@
+#include <iostream>
+#include <windows.h>
+
+int main() {
+
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    int a, b;
+
+    std::cout << "Введіть два цілих числа: ";
+    std::cin >> a >> b;
+
+    int* p1 = &a;
+    int* p2 = &b;
+
+    *p1 *= 2;  
+    *p2 /= 2;  
+
+    std::cout << "Нові значення: a = " << a << ", b = " << b << std::endl;
+
+    return 0;
+}
