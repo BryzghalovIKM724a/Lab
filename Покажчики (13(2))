@@ -1,0 +1,32 @@
+#include <iostream>
+#include <windows.h>
+
+int main() {
+    
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    double* p1 = new double;
+    double* p2 = new double;
+    double* p3 = new double;
+
+    *p1 = 3.33;
+    *p2 = 2.22;
+    *p3 = 1.11;
+
+    std::cout << "До обміну:\n";
+    std::cout << "p1 = " << *p1 << ", p2 = " << *p2 << ", p3 = " << *p3 << std::endl;
+
+    double temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+
+    std::cout << "Після обміну:\n";
+    std::cout << "p1 = " << *p1 << ", p2 = " << *p2 << ", p3 = " << *p3 << std::endl;
+
+    delete p1;
+    delete p2;
+    delete p3;
+
+    return 0;
+}
