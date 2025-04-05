@@ -1,0 +1,32 @@
+#include <iostream>
+#include <windows.h>
+#include <string>
+using namespace std;
+
+struct Student {
+    string name;
+    int age;
+    float averageGrade;
+};
+
+int main() {
+
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+   
+    Student student;
+
+    cout << "Введіть ім'я студента: ";
+    getline(cin, student.name);
+    cout << "Введіть вік студента: ";
+    cin >> student.age;
+    cout << "Введіть середній бал студента: ";
+    cin >> student.averageGrade;
+
+    cout << "\nІнформація про студента:\n";
+    cout << "Ім'я: " << student.name << "\n";
+    cout << "Вік: " << student.age << "\n";
+    cout << "Середній бал: " << student.averageGrade << "\n";
+
+    return 0;
+}
