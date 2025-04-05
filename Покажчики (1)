@@ -1,0 +1,21 @@
+#include <iostream>
+#include <windows.h>
+using namespace std;
+
+int main() {
+    SetConsoleCP(1251); 
+    SetConsoleOutputCP(1251);
+
+    int число;
+    int* покажчик;
+
+    cout << "Введіть число: ";
+    cin >> число;
+
+    покажчик = &число;
+    *покажчик = *покажчик + 10;
+
+    cout << "Змінене значення: " << число << endl;
+
+    return 0;
+}
