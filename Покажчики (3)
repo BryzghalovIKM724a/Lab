@@ -1,0 +1,29 @@
+#include <iostream>
+#include <windows.h>
+using namespace std;
+
+int main() {
+    SetConsoleCP(1251); 
+    SetConsoleOutputCP(1251);
+
+    int розмір;
+    cout << "Введіть кількість елементів масиву: ";
+    cin >> розмір;
+
+    int* масив = new int[розмір];
+
+    for (int i = 0; i < розмір; i++) {
+        cout << "Введіть елемент " << i + 1 << ": ";
+        cin >> масив[i];
+    }
+
+    cout << "Елементи масиву: ";
+    for (int i = 0; i < розмір; i++) {
+        cout << масив[i] << " ";
+    }
+    cout << endl;
+
+    delete[] масив;
+
+    return 0;
+}
