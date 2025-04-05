@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <windows.h>
+
+struct Lyudyna {
+    std::string imya;
+    int vik;
+};
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    Lyudyna* pokazchyk = new Lyudyna;
+
+    std::cout << "Введіть ім'я людини: ";
+    std::getline(std::cin, pokazchyk->imya); // Сначала вводим строку
+
+    std::cout << "Введіть вік: ";
+    std::cin >> pokazchyk->vik;
+
+    std::cout << "\nДані людини через покажчик:\n";
+    std::cout << "Ім'я: " << pokazchyk->imya << std::endl;
+    std::cout << "Вік: " << pokazchyk->vik << std::endl;
+
+    pokazchyk->vik += 5;
+
+    std::cout << "\nЧерез 5 років:\n";
+    std::cout << "Ім'я: " << pokazchyk->imya << std::endl;
+    std::cout << "Новий вік: " << pokazchyk->vik << std::endl;
+
+    delete pokazchyk;
+
+    return 0;
+}
