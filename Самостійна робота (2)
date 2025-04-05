@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct BankAccount {
+    string ownerName;
+    string accountNumber;
+    double balance;
+};
+
+int main() {
+    BankAccount account;
+    cout << "Введіть ім'я власника рахунку: ";
+    getline(cin, account.ownerName);
+    cout << "Введіть номер рахунку: ";
+    getline(cin, account.accountNumber);
+    cout << "Введіть початковий баланс: ";
+    cin >> account.balance;
+
+    int choice;
+    double amount;
+
+    do {
+        cout << "\n1. Поповнити рахунок\n2. Зняти гроші\n3. Показати баланс\n0. Вихід\nВаш вибір: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Сума для поповнення: ";
+                cin >> amount;
+                account.balance += amount;
+                break;
+            case 2:
+                cout << "Сума для зняття: ";
+                cin >> amount;
+                if (amount <= account.balance) {
+                    account.balance -= amount;
+                } else {
+                    cout << "Недостатньо коштів!\n";
+                }
+                break;
+            case 3:
+                cout << "Баланс: " << account.balance << "\n";
+                break;
+        }
+    } while (choice != 0);
+
+    return 0;
+}
