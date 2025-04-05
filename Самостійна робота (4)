@@ -1,0 +1,71 @@
+#include <iostream>
+#include <windows.h>
+#include <string>
+using namespace std;
+
+struct Book {
+    string title;
+    string author;
+    int year;
+};
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    Book books[100];
+    int count = 0;
+    int choice;
+
+    do {
+        cout << "\n1. Додати книгу\n2. Пошук за автором\n3. Пошук за роком\n4. Показати всі книги\n0. Вихід\nВаш вибір: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            cout << "Назва книги: ";
+            getline(cin, books[count].title);
+            cout << "Автор: ";
+            getline(cin, books[count].author);
+            cout << "Рік видання: ";
+            cin >> books[count].year;
+            count++;
+        }
+        else if (choice == 2) {
+            string searchAuthor;
+            cout << "Введіть автора: ";
+            cin.ignore();
+            getline(cin, searchAuthor);
+            bool found = false;
+            for (int i = 0; i < count; i++) {
+                if (books[i].author == searchAuthor) {
+                    cout << "Знайдено: " << books[i].title << ", " << books[i].year << " рік\n";
+                    found = true;
+                }
+            }
+            if (!found) cout << "Книг цього автора не знайдено.\n";
+        }
+        else if (choice == 3) {
+            int searchYear;
+            cout << "Введіть рік: ";
+            cin >> searchYear;
+            bool found = false;
+            for (int i = 0; i < count; i++) {
+                if (books[i].year == searchYear) {
+                    cout << "Знайдено: " << books[i].title << ", автор: " << books[i].author << "\n";
+                    found = true;
+                }
+            }
+            if (!found) cout << "Книг цього року не знайдено.\n";
+        }
+        else if (choice == 4) {
+            for (int i = 0; i < count; i++) {
+                cout << "Назва: " << books[i].title
+                    << ", Автор: " << books[i].author
+                    << ", Рік: " << books[i].year << "\n";
+            }
+        }
+    } while (choice != 0);
+
+    return 0;
+}
