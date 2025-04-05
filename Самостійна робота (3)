@@ -1,0 +1,63 @@
+#include <iostream>
+#include <windows.h>
+#include <string>
+using namespace std;
+
+struct Product {
+    string name;
+    double price;
+    int quantity;
+};
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    Product products[100];
+    int count = 0;
+    int choice;
+
+    do {
+        cout << "\n1. Додати товар\n2. Змінити кількість\n3. Показати всі товари\n0. Вихід\nВаш вибір: ";
+        cin >> choice;
+        cin.ignore(); // очищаем буфер после cin
+
+        if (choice == 1) {
+            cout << "Назва товару: ";
+            std::getline(std::cin, products[count].name);
+            cout << "Ціна: ";
+            cin >> products[count].price;
+            cout << "Кількість: ";
+            cin >> products[count].quantity;
+            count++;
+        }
+        else if (choice == 2) {
+            string searchName;
+            cout << "Назва товару для зміни: ";
+            cin.ignore();
+            std::getline(std::cin, searchName);
+            bool found = false;
+            for (int i = 0; i < count; i++) {
+                if (products[i].name == searchName) {
+                    cout << "Нова кількість: ";
+                    cin >> products[i].quantity;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                cout << "Товар не знайдено!\n";
+            }
+        }
+        else if (choice == 3) {
+            for (int i = 0; i < count; i++) {
+                cout << "Назва: " << products[i].name
+                    << ", Ціна: " << products[i].price
+                    << ", Кількість: " << products[i].quantity << "\n";
+            }
+        }
+
+    } while (choice != 0);
+
+    return 0;
+}
