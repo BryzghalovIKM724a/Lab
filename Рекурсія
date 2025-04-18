@@ -1,0 +1,31 @@
+#include <iostream>
+#include <windows.h>
+
+using namespace std;
+
+double a(int n) {
+    if (n == 1)
+        return 5.2;
+    else
+        return a(n - 1) + 0.2;
+}
+
+int main() {
+
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    int n;
+    cout << "Введіть номер елемента ряду: ";
+    cin >> n;
+
+    if (n < 1 || n > 25) {
+        cout << "Невірне значення n. Елемент вийшов за межі ряду." << endl;
+    }
+    else {
+        double value = a(n);
+        cout << n << "-й елемент ряду = " << value << endl;
+    }
+
+    return 0;
+}
