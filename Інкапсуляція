@@ -1,0 +1,77 @@
+#include <iostream>
+#include <windows.h>
+#include <string>
+using namespace std;
+
+class House {
+private:
+    string address;
+    int floor;
+    int rooms;
+    double area;
+
+public:
+    House(string addr = "", int fl = 0, int rm = 0, double ar = 0.0) {
+        address = addr;
+        floor = fl;
+        rooms = rm;
+        area = ar;
+    }
+
+    int getRooms() { return rooms; }
+    int getFloor() { return floor; }
+    double getArea() { return area; }
+    string getAddress() { return address; }
+
+    void print() {
+        cout << "Адреса: " << address << ", Поверх: " << floor
+            << ", Кімнат: " << rooms << ", Площа: " << area << " кв.м" << endl;
+    }
+};
+
+int main() {
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+
+    const int SIZE = 5;
+    House flats[SIZE] = {
+        House("вул. Шевченка, 1", 3, 2, 56.5),
+        House("вул. Франка, 10", 5, 3, 75.0),
+        House("вул. Лесі Українки, 7", 2, 2, 60.0),
+        House("вул. Грушевського, 4", 4, 1, 40.0),
+        House("вул. Хрещатик, 15", 6, 3, 85.0)
+    };
+
+    int searchRooms, minFloor, maxFloor;
+    double minArea;
+
+    cout << "а) Введіть кількість кімнат для пошуку: ";
+    cin >> searchRooms;
+    for (int i = 0; i < SIZE; i++) {
+        if (flats[i].getRooms() == searchRooms) {
+            flats[i].print();
+        }
+    }
+
+    cout << "\nб) Введіть кількість кімнат і діапазон поверхів:\n";
+    cout << "Кімнат: "; cin >> searchRooms;
+    cout << "Мінімальний поверх: "; cin >> minFloor;
+    cout << "Максимальний поверх: "; cin >> maxFloor;
+    for (int i = 0; i < SIZE; i++) {
+        if (flats[i].getRooms() == searchRooms &&
+            flats[i].getFloor() >= minFloor &&
+            flats[i].getFloor() <= maxFloor) {
+            flats[i].print();
+        }
+    }
+
+    cout << "\nв) Введіть мінімальну площу: ";
+    cin >> minArea;
+    for (int i = 0; i < SIZE; i++) {
+        if (flats[i].getArea() > minArea) {
+            flats[i].print();
+        }
+    }
+
+    return 0;
+}
