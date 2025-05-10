@@ -1,0 +1,162 @@
+#include <iostream>
+#include <windows.h>
+#include <cmath>
+#include <string>
+using namespace std;
+
+const double PI = 3.141592653589793;
+
+class Triangle {
+protected:
+    string name;
+    double x1, y1, x2, y2, x3, y3;
+
+public:
+    Triangle(string n, double ax, double ay, double bx, double by, double cx, double cy)
+        : name(n), x1(ax), y1(ay), x2(bx), y2(by), x3(cx), y3(cy) {
+    }
+
+    void move(double dx, double dy) {
+        x1 += dx; y1 += dy;
+        x2 += dx; y2 += dy;
+        x3 += dx; y3 += dy;
+    }
+
+    void resize(double factor) {
+        double cx = (x1 + x2 + x3) / 3.0;
+        double cy = (y1 + y2 + y3) / 3.0;
+
+        x1 = cx + (x1 - cx) * factor;
+        y1 = cy + (y1 - cy) * factor;
+        x2 = cx + (x2 - cx) * factor;
+        y2 = cy + (y2 - cy) * factor;
+        x3 = cx + (x3 - cx) * factor;
+        y3 = cy + (y3 - cy) * factor;
+    }
+
+    void rotate(double degrees) {
+        double angle = degrees * PI / 180.0;
+        double cx = (x1 + x2 + x3) / 3.0;
+        double cy = (y1 + y2 + y3) / 3.0;
+
+        rotatePoint(x1, y1, cx, cy, angle);
+        rotatePoint(x2, y2, cx, cy, angle);
+        rotatePoint(x3, y3, cx, cy, angle);
+    }
+
+    void rotatePoint(double& x, double& y, double cx, double cy, double angle) {
+        double dx = x - cx;
+        double dy = y - cy;
+        double rx = dx * cos(angle) - dy * sin(angle);
+        double ry = dx * sin(angle) + dy * cos(angle);
+        x = cx + rx;
+        y = cy + ry;
+    }
+
+    void printState() {
+        cout << "Стан трикутника \"" << name << "\":\n";
+        cout << "A(" << x1 << ", " << y1 << ")\n";
+        cout << "B(" << x2 << ", " << y2 << ")\n";
+        cout << "C(" << x3 << ", " << y3 << ")\n";
+    }
+};
+
+class Rectangle : public Triangle {
+private:
+    double x4, y4;
+
+public:
+    Rectangle(string n, double ax, double ay, double bx, double by,
+        double cx, double cy, double dx, double dy)
+        : Triangle(n, ax, ay, bx, by, cx, cy), x4(dx), y4(dy) {
+    }
+
+    void printState() {
+        cout << "Стан прямокутника \"" << name << "\":\n";
+        cout << "A(" << x1 << ", " << y1 << ")\n";
+        cout << "B(" << x2 << ", " << y2 << ")\n";
+        cout << "C(" << x3 << ", " << y3 << ")\n";
+        cout << "D(" << x4 << ", " << y4 << ")\n";
+    }
+
+    void move(double dx, double dy) {
+        Triangle::move(dx, dy);
+        x4 += dx;
+        y4 += dy;
+    }
+
+    void resize(double factor) {
+        double cx = (x1 + x2 + x3 + x4) / 4.0;
+        double cy = (y1 + y2 + y3 + y4) / 4.0;
+
+        x1 = cx + (x1 - cx) * factor;
+        y1 = cy + (y1 - cy) * factor;
+        x2 = cx + (x2 - cx) * factor;
+        y2 = cy + (y2 - cy) * factor;
+        x3 = cx + (x3 - cx) * factor;
+        y3 = cy + (y3 - cy) * factor;
+        x4 = cx + (x4 - cx) * factor;
+        y4 = cy + (y4 - cy) * factor;
+    }
+
+    void rotate(double degrees) {
+        double angle = degrees * PI / 180.0;
+        double cx = (x1 + x2 + x3 + x4) / 4.0;
+        double cy = (y1 + y2 + y3 + y4) / 4.0;
+
+        rotatePoint(x1, y1, cx, cy, angle);
+        rotatePoint(x2, y2, cx, cy, angle);
+        rotatePoint(x3, y3, cx, cy, angle);
+        rotatePoint(x4, y4, cx, cy, angle);
+    }
+
+    void resizeInRange(double factor, double min, double max) {
+        if (factor >= min && factor <= max) {
+            resize(factor);
+        }
+        else {
+            cout << "Значення поза діапазоном: " << factor << " (допустимо: " << min << " - " << max << ")\n";
+        }
+    }
+};
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    Triangle t("ABC", 0, 0, 4, 0, 0, 3);
+    cout << "Початковий стан трикутника:\n";
+    t.printState();
+    t.move(1, 2);
+    cout << "\nПісля переміщення:\n";
+    t.printState();
+    t.resize(1.5);
+    cout << "\nПісля збільшення в 1.5 рази:\n";
+    t.printState();
+    t.rotate(90);
+    cout << "\nПісля обертання на 90 градусів:\n";
+    t.printState();
+
+    cout << "\n=========================\n";
+
+    Rectangle r("ABCD", 0, 0, 4, 0, 4, 3, 0, 3);
+    cout << "Початковий стан прямокутника:\n";
+    r.printState();
+    r.move(2, 1);
+    cout << "\nПісля переміщення:\n";
+    r.printState();
+    r.resize(2.0);
+    cout << "\nПісля збільшення в 2 рази:\n";
+    r.printState();
+    r.rotate(45);
+    cout << "\nПісля обертання на 45 градусів:\n";
+    r.printState();
+    r.resizeInRange(0.5, 0.3, 2.0);
+    cout << "\nЗменшення в межах діапазону (0.5):\n";
+    r.printState();
+    r.resizeInRange(5.0, 0.3, 2.0);
+    cout << "\nСпроба зменшити за межами діапазону (5.0):\n";
+    r.printState();
+
+    return 0;
+}
