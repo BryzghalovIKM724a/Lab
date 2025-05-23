@@ -1,0 +1,72 @@
+#include <iostream>
+#include <windows.h>
+using namespace std;
+
+class Matrix {
+private:
+    int data[3];
+
+public:
+    Matrix() {
+        for (int i = 0; i < 3; i++) data[i] = 0;
+    }
+
+    Matrix(int a, int b, int c) {
+        data[0] = a;
+        data[1] = b;
+        data[2] = c;
+    }
+
+    Matrix operator+(const Matrix& other) const {
+        return Matrix(
+            data[0] + other.data[0],
+            data[1] + other.data[1],
+            data[2] + other.data[2]
+        );
+    }
+
+    Matrix operator*(const Matrix& other) const {
+        return Matrix(
+            data[0] * other.data[0],
+            data[1] * other.data[1],
+            data[2] * other.data[2]
+        );
+    }
+
+    bool operator==(const Matrix& other) const {
+        return data[0] == other.data[0] &&
+            data[1] == other.data[1] &&
+            data[2] == other.data[2];
+    }
+
+    void print() const {
+        cout << "[" << data[0] << ", " << data[1] << ", " << data[2] << "]" << endl;
+    }
+};
+
+int main() {
+
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+
+    Matrix m1(1, 2, 3);
+    Matrix m2(4, 5, 6);
+
+    cout << "Матриця 1: ";
+    m1.print();
+    cout << "Матриця 2: ";
+    m2.print();
+
+    Matrix sum = m1 + m2;
+    cout << "Сума: ";
+    sum.print();
+
+    Matrix prod = m1 * m2;
+    cout << "Добуток: ";
+    prod.print();
+
+    cout << "Чи рівні? ";
+    cout << ((m1 == m2) ? "Так" : "Ні") << endl;
+
+    return 0;
+}
