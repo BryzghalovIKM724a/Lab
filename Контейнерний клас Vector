@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <windows.h>
+using namespace std;
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    vector<double> v = { 9, 6, 4, -2, -3, 0, 1, -5, 3, 2,
+                        -1, -4, 7, -6, 8, -7, 5, -8, -9, 10 };
+
+    int minIndex = 0, maxIndex = 0;
+    for (int i = 1; i < v.size(); ++i) {
+        if (v[i] < v[minIndex]) minIndex = i;
+        if (v[i] > v[maxIndex]) maxIndex = i;
+    }
+
+    int start = min(minIndex, maxIndex);
+    int end = max(minIndex, maxIndex);
+    double sum = 0;
+    int count = 0;
+    for (int i = start; i <= end; ++i) {
+        sum += v[i];
+        count++;
+    }
+    double average = sum / count;
+
+    double positiveSum = 0;
+    int negativeCount = 0;
+    for (double num : v) {
+        if (num > 0) positiveSum += num;
+        else if (num < 0) negativeCount++;
+    }
+
+    cout << "Середнє між мінімальним і максимальним: " << average << endl;
+    cout << "Сума додатних елементів: " << positiveSum << endl;
+    cout << "Кількість від’ємних елементів: " << negativeCount << endl;
+
+    return 0;
+}
